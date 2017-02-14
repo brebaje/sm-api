@@ -25,5 +25,17 @@
   "bugs": {
     "url": "https://github.com/brebaje/sm-api/issues"
   },
-  "homepage": "https://github.com/brebaje/sm-api#readme"
+  "homepage": "https://github.com/brebaje/sm-api#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "cors": "^2.8.1",
+    "express": "^4.14.1"
+  },
+  "devDependencies": {
+    "aglio": "^2.3.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "nodemon": "^1.11.0"
+  }
 }
