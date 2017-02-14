@@ -1,0 +1,29 @@
+{
+  "name": "sm-api",
+  "version": "1.0.0",
+  "description": "API for delivering our Supermanager ACB's private league data to the frontend",
+  "main": "app/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brebaje/sm-api.git"
+  },
+  "keywords": [
+    "api",
+    "supermanager",
+    "acb",
+    "backend",
+    "nodejs",
+    "javascript",
+    "express",
+    "mongodb"
+  ],
+  "author": "Manuel Bravo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brebaje/sm-api/issues"
+  },
+  "homepage": "https://github.com/brebaje/sm-api#readme"
+}
