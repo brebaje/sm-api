@@ -8,6 +8,7 @@ API for delivering our Supermanager ACB's private league data to the frontend
 - `npm run dev`
 
 Will run the application via nodemon after eslint parses the code.
+
 Application will run on localhost on port 3000.
 
 ## Documentation
