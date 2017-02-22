@@ -1,6 +1,6 @@
 FORMAT: 1A
 
-# SM-API
+# sm-api
 
 sm-api is a [Node.js](https://nodejs.org) REST API
 
