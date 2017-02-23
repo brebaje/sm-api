@@ -5,8 +5,6 @@
   https://github.com/am-MongoDB/MongoDB-Mongopop/blob/master/javascripts/db.js
  */
 
-'use strict'; // eslint-disable-line strict, lines-around-directive
-
 const MongoClient = require('mongodb').MongoClient;
 const logger = require('./log');
 
@@ -77,6 +75,42 @@ class DB {
               logger.log(`[database.js] ERROR countDocuments failed: ${err.message}`);
               reject(err);
             });
+        }
+      });
+    });
+  }
+
+  findDocuments(collection, criteria) {
+    const db = this.db;
+
+    return new Promise((resolve, reject) => {
+      db.collection(collection, { strict: true }, (error, coll) => {
+        if (error) {
+          logger.log(`[database.js] ERROR accessing collection ${collection}: ${error.message}`);
+          reject(error);
+        }
+        else {
+          const docs = coll.find(criteria).toArray();
+
+          resolve(docs);
+        }
+      });
+    });
+  }
+
+  findDoc(collection, criteria) {
+    const db = this.db;
+
+    return new Promise((resolve, reject) => {
+      db.collection(collection, { strict: true }, (error, coll) => {
+        if (error) {
+          logger.log(`[database.js] ERROR accessing collection ${collection}: ${error.message}`);
+          reject(error);
+        }
+        else {
+          const docs = coll.findOne(criteria);
+
+          resolve(docs);
         }
       });
     });
