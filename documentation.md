@@ -68,10 +68,88 @@ sm-api is a [Node.js](https://nodejs.org) REST API
 + Response 200 (application/json)
   + Body
 
-              {
-                "_id": "purE",
-                "team": "Illuminati",
-                "bio": "",
-                "picture": "",
-                "active": true
-              }
+             {
+               "_id": "purE",
+               "team": "Illuminati",
+               "bio": "",
+               "picture": "",
+               "active": true
+             }
+
+# Group Standings
+
+## Standings endpoint [/standings]
+
+### Standings information [GET]
+
++ Response 200 (application/json)
+  + Body
+
+             [
+               {
+                 "Temporada": "15-16",
+                 "total": 34
+               },
+               {
+                 "Temporada": "16-17",
+                 "total": 34
+               }
+             ]
+
+### List of season standings [GET /standings/{season}]
+
++ Parameters
+  + season: `16-17` (required, string) - season years
+
++ Response 200 (application/json)
+  + Body
+
+             [
+               {
+                 "_id": "xxx",
+                 "Numero": 1,
+                 "Temporada": "16-17",
+                 "Jornada": {},
+                 "General": {},
+                 "Broker": {},
+                 "Puntos": {},
+                 "Rebotes": {},
+                 "Triples": {},
+                 "Asistencias": {}
+               },
+               ...,
+               {
+                 "_id": "zzz",
+                 "Numero": 34,
+                 "Temporada": "16-17",
+                 "Jornada": {},
+                 "General": {},
+                 "Broker": {},
+                 "Puntos": {},
+                 "Rebotes": {},
+                 "Triples": {},
+                 "Asistencias": {}
+               }
+             ]
+
+### Details for a season standing [GET /standings/{season}/{number}]
+
++ Parameters
+  + season: `16-17` (required, string) - season years
+  + number: 17 (required, number) - standings number [1-34]
+
++ Response 200 (application/json)
+  + Body
+
+             {
+               "_id": "xyz",
+               "Numero": 17,
+               "Temporada": "16-17",
+               "Jornada": {},
+               "General": {},
+               "Broker": {},
+               "Puntos": {},
+               "Rebotes": {},
+               "Triples": {},
+               "Asistencias": {}
+             }
