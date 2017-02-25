@@ -12,6 +12,31 @@ sm-api is a [Node.js](https://nodejs.org) REST API
 
 + Response 200
 
+# Group History
+
+## History endpoint [/history]
+
+### Historical list [GET]
+
++ Response 200 (application/json)
+  + Body
+
+             [
+               {
+                 "_id": 1,
+                 "winner": "purE",
+                 "second": "cheminator",
+                 "season": "05-06"
+               },
+               ...,
+               {
+                 "_id": 11,
+                 "winner": "montouto2000",
+                 "second": "lhooq1770",
+                 "season": "15-16"
+               }
+             ]
+
 # Group Player
 
 ## Player endpoint [/player]
