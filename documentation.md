@@ -178,3 +178,10 @@ sm-api is a [Node.js](https://nodejs.org) REST API
                "Triples": {},
                "Asistencias": {}
              }
+
++ Response 400 (application/json)
+  + Body
+
+             {
+               "error": "Invalid standings number value: 35"
+             }
