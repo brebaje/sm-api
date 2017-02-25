@@ -132,7 +132,7 @@ sm-api is a [Node.js](https://nodejs.org) REST API
                }
              ]
 
-### Details for a season standing [GET /standings/{season}/{number}]
+### Details for a standing [GET /standings/{season}/{number}]
 
 + Parameters
   + season: `16-17` (required, string) - season years
