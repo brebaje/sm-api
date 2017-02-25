@@ -6,7 +6,7 @@
  */
 
 const MongoClient = require('mongodb').MongoClient;
-const logger = require('./log');
+const logger = require('../utils/log');
 
 class DB {
   constructor() {
@@ -50,6 +50,64 @@ class DB {
           logger.log(`[database.js] ERROR closing the connection: ${error.message}`);
         });
     }
+  }
+
+  countByField(collection, field) {
+    // Returns a promise which resolve to an array of objects
+    // { field: 'xx', total: x }
+
+    const db = this.db;
+
+    return new Promise((resolve, reject) => {
+      db.collection(collection, { strict: true }, (error, coll) => {
+        if (error) {
+          logger.log(`[database.js] ERROR accessing collection ${collection}: ${error.message}`);
+          reject(error);
+        }
+        else {
+          const result = [];
+
+          coll.aggregate([
+            {
+              $group: {
+                _id: `$${field}`,
+                total: { $sum: 1 },
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                field: '$_id',
+                total: '$total',
+              },
+            },
+            {
+              $sort: {
+                field: 1,
+              },
+            },
+          ])
+            .each((err, doc) => {
+              if (err) {
+                logger.log(`[database.js] ERROR indexCount failed: ${err.message}`);
+                reject(err);
+              }
+              else if (doc) {
+                const resultDoc = {};
+
+                resultDoc[field] = doc.field;
+                resultDoc.total = doc.total;
+
+                result.push(resultDoc);
+              }
+              else {
+                // we processed all docs
+                resolve(result);
+              }
+            });
+        }
+      });
+    });
   }
 
   countDocuments(collection) {

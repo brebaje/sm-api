@@ -8,6 +8,7 @@ const logger = require('./utils/log');
 const config = require('./config');
 const routes = require('./routes');
 const player = require('./routes/player');
+const standings = require('./routes/standings');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 
 app.use('/', routes);
 app.use('/player', player);
+app.use('/standings', standings);
 
 // listen for connections
 app.listen(config.PORT, () => {

@@ -1,4 +1,4 @@
-const DB = require('../utils/database');
+const DBService = require('../services/database');
 const config = require('../config');
 
 const collection = 'players';
@@ -6,7 +6,7 @@ const uri = `mongodb://${config.DB_HOST}:${config.DB_PORT}/${config.DB_DATABASE}
 
 module.exports = {
   getPlayer(player) {
-    const database = new DB();
+    const database = new DBService();
 
     return new Promise((resolve, reject) => {
       database.connect(uri)
@@ -25,7 +25,7 @@ module.exports = {
   },
 
   getPlayers(criteria) {
-    const database = new DB();
+    const database = new DBService();
 
     return new Promise((resolve, reject) => {
       database.connect(uri)
