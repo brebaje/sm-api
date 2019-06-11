@@ -1,6 +1,7 @@
 const express = require('express');
 const standings = require('../models/standings');
 const ValidationService = require('../services/validation');
+const logger = require('../utils/log');
 
 const router = express.Router();
 
@@ -16,6 +17,9 @@ router.get('/', (req, res) => {
       res.json(dbStandings);
 
       return res;
+    })
+    .catch((error) => {
+      logger.log(error.message);
     });
 });
 
@@ -26,6 +30,9 @@ router.get('/:season', (req, res) => {
       res.json(dbStandings);
 
       return res;
+    })
+    .catch((error) => {
+      logger.log(error.message);
     });
 });
 
@@ -47,6 +54,9 @@ router.get('/:season/:number', (req, res) => {
       res.json(dbStandings);
 
       return res;
+    })
+    .catch((error) => {
+      logger.log(error.message);
     });
 });
 

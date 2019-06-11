@@ -1,5 +1,6 @@
 const express = require('express');
 const history = require('../models/history');
+const logger = require('../utils/log');
 
 const router = express.Router();
 
@@ -10,6 +11,9 @@ router.get('/', (req, res) => {
       res.json(dbHistory);
 
       return res;
+    })
+    .catch((error) => {
+      logger.log(error.message);
     });
 });
 
