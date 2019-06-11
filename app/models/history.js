@@ -2,7 +2,9 @@ const DBService = require('../services/database');
 const config = require('../config');
 
 const collection = 'history';
-const uri = `mongodb://${config.DB_HOST}:${config.DB_PORT}/${config.DB_DATABASE}`;
+// TODO refactor
+const credentials = config.DB_USER ? `${config.DB_USER}:${config.DB_PASS}@` : '';
+const uri = `mongodb://${credentials}${config.DB_HOST}:${config.DB_PORT}/${config.DB_DATABASE}`;
 
 module.exports = {
   getHistory() {

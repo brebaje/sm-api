@@ -16,85 +16,106 @@ sm-api is a [Node.js](https://nodejs.org) REST API
 
 ## History endpoint [/history]
 
-### Historical list [GET]
+### Historical data [GET]
 
 + Response 200 (application/json)
   + Body
 
              [
                {
-                 "_id": 1,
+                 "_id": "abc1234",
                  "winner": "purE",
                  "second": "cheminator",
-                 "season": "05-06"
+                 "season": "2005-06"
                },
                ...,
                {
-                 "_id": 11,
+                 "_id": "xyz456",
                  "winner": "montouto2000",
                  "second": "lhooq1770",
-                 "season": "15-16"
+                 "season": "2015-16"
                }
              ]
 
-# Group Player
+# Group Players
 
-## Player endpoint [/player]
+## Players endpoint [/players]
 
-### List of active players [GET]
+### List of players [GET]
 
 + Response 200 (application/json)
   + Body
 
              [
                {
-                 "_id": "purE",
+                 "_id": "abc1234",
+                 "nick": "purE",
+                 "name": "Manu",
                  "team": "Illuminati",
                  "bio": "",
                  "picture": "",
                  "active": true
                },
+               ...,
                {
-                 "_id": "sabinaesdios",
-                 "team": "Síndrome Peleteiro",
-                 "bio": "",
-                 "picture": "",
-                 "active": true
-               }
-             ]
-
-### List of all historic players [GET /player/historic]
-
-+ Response 200 (application/json)
-  + Body
-
-             [
-               {
-                 "_id": "purE",
-                 "team": "Illuminati",
-                 "bio": "",
-                 "picture": "",
-                 "active": true
-               },
-               {
-                 "_id": "vporto",
+                 "_id": "xyz456",
+                 "nick": "vporto",
+                 "name": "Valentín",
                  "team": "AC Milano",
                  "bio": "",
                  "picture": "",
                  "active": false
-               }
+               },
              ]
 
-### Player information [GET /player/{alias}]
+### List of all active players [GET /players/active]
+
++ Response 200 (application/json)
+  + Body
+
+             [
+               {
+                 "_id": "abc1234",
+                 "nick": "purE",
+                 "name": "Manu",
+                 "team": "Illuminati",
+                 "bio": "",
+                 "picture": "",
+                 "active": true
+               },
+               ...,
+             ]
+
+### List of all retired players [GET /players/retired]
+
++ Response 200 (application/json)
+  + Body
+
+             [
+               {
+                 "_id": "xyz456",
+                 "nick": "vporto",
+                 "name": "Valentín",
+                 "team": "AC Milano",
+                 "bio": "",
+                 "picture": "",
+                 "active": false
+               },
+               ...
+             ]
+
+### Player information [GET /players/{nick}]
 
 + Parameters
-  + alias: `purE` (required, string) - alias of the player in the league
+  + nick: `purE` (required, string) - player's nick in the league
 
 + Response 200 (application/json)
   + Body
 
              {
-               "_id": "purE",
+               "_id": "abc1234",
+               "nick": "purE",
+               "name": "Manu",
                "team": "Illuminati",
                "bio": "",
                "picture": "",
@@ -112,11 +133,11 @@ sm-api is a [Node.js](https://nodejs.org) REST API
 
              [
                {
-                 "Temporada": "15-16",
+                 "Temporada": "2015-16",
                  "total": 34
                },
                {
-                 "Temporada": "16-17",
+                 "Temporada": "2016-17",
                  "total": 34
                }
              ]
@@ -124,7 +145,7 @@ sm-api is a [Node.js](https://nodejs.org) REST API
 ### List of season standings [GET /standings/{season}]
 
 + Parameters
-  + season: `16-17` (required, string) - season years
+  + season: `2016-17` (required, string) - season years
 
 + Response 200 (application/json)
   + Body
@@ -133,7 +154,7 @@ sm-api is a [Node.js](https://nodejs.org) REST API
                {
                  "_id": "xxx",
                  "Numero": 1,
-                 "Temporada": "16-17",
+                 "Temporada": "2016-17",
                  "Jornada": {},
                  "General": {},
                  "Broker": {},
@@ -146,7 +167,7 @@ sm-api is a [Node.js](https://nodejs.org) REST API
                {
                  "_id": "zzz",
                  "Numero": 34,
-                 "Temporada": "16-17",
+                 "Temporada": "2016-17",
                  "Jornada": {},
                  "General": {},
                  "Broker": {},
@@ -160,7 +181,7 @@ sm-api is a [Node.js](https://nodejs.org) REST API
 ### Details for a standing [GET /standings/{season}/{number}]
 
 + Parameters
-  + season: `16-17` (required, string) - season years
+  + season: `2016-17` (required, string) - season years
   + number: 17 (required, number) - standings number [1-34]
 
 + Response 200 (application/json)
@@ -169,7 +190,7 @@ sm-api is a [Node.js](https://nodejs.org) REST API
              {
                "_id": "xyz",
                "Numero": 17,
-               "Temporada": "16-17",
+               "Temporada": "2016-17",
                "Jornada": {},
                "General": {},
                "Broker": {},

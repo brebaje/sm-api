@@ -2,16 +2,18 @@ const DBService = require('../services/database');
 const config = require('../config');
 
 const collection = 'players';
-const uri = `mongodb://${config.DB_HOST}:${config.DB_PORT}/${config.DB_DATABASE}`;
+// TODO refactor
+const credentials = config.DB_USER ? `${config.DB_USER}:${config.DB_PASS}@` : '';
+const uri = `mongodb://${credentials}${config.DB_HOST}:${config.DB_PORT}/${config.DB_DATABASE}`;
 
 module.exports = {
-  getPlayer(player) {
+  getPlayer(nick) {
     const database = new DBService();
 
     return new Promise((resolve, reject) => {
       database.connect(uri)
         .then(() => {
-          return database.findDoc(collection, { _id: player });
+          return database.findDoc(collection, { nick });
         })
         .then((dbPlayer) => {
           database.close();
@@ -49,5 +51,9 @@ module.exports = {
 
   getAllActive() {
     return this.getPlayers({ active: true });
+  },
+
+  getAllRetired() {
+    return this.getPlayers({ active: false });
   },
 };

@@ -1,6 +1,6 @@
 module.exports = {
   // App
-  PORT: process.env.PORT,
+  PORT: process.env.PORT || 80,
   // Database
   DB_DATABASE: process.env.DB_DATABASE,
   DB_HOST: process.env.DB_HOST,

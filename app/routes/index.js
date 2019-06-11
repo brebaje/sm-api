@@ -4,6 +4,15 @@ const logger = require('../utils/log');
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/index.html'), null, (err) => {
+    if (err) {
+      logger.log(err);
+      res.status(err.status).end();
+    }
+  });
+});
+
 router.get('/healthcheck', (req, res) => {
   res.status(200).end();
 });

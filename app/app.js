@@ -10,7 +10,7 @@ const config = require('./config');
 // routes
 const routes = require('./routes');
 const history = require('./routes/history');
-const player = require('./routes/player');
+const players = require('./routes/players');
 const standings = require('./routes/standings');
 
 const app = express();
@@ -20,12 +20,12 @@ app.use(bodyParser.json());
 
 app.use('/', routes);
 app.use('/history', history);
-app.use('/player', player);
+app.use('/players', players);
 app.use('/standings', standings);
 
 // listen for connections
 app.listen(config.PORT, () => {
-  logger.log(`Listening in http://localhost: ${config.PORT}`);
+  logger.log(`Listening in http://localhost:${config.PORT}`);
 });
 
 // for mocha tests purposes
