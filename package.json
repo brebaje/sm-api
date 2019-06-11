@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "SM_ENV=dev nodemon app/app.js --exec \"npm run eslint && node\"",
     "docs": "aglio --theme-variables flatly -i documentation.md -o app/views/docs.html",
-    "eslint": "eslint app/**"
+    "eslint": "eslint app/**",
+    "start": "SM_ENV=prod node app/app.js"
   },
   "repository": {
     "type": "git",
