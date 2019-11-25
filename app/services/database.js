@@ -6,6 +6,7 @@
  */
 
 const MongoClient = require('mongodb').MongoClient;
+const config = require('../config');
 const logger = require('../utils/log');
 
 class DB {
@@ -14,7 +15,10 @@ class DB {
     this.db = null;
   }
 
-  connect(uri) {
+  connect() {
+    const credentials = config.DB_USER ? `${config.DB_USER}:${config.DB_PASS}@` : '';
+    const uri = `mongodb://${credentials}${config.DB_HOST}:${config.DB_PORT}/${config.DB_DATABASE}`;
+
     return new Promise((resolve, reject) => {
       if (this.db) {
         // Already connected
