@@ -12,22 +12,26 @@ const logger = require('../utils/log');
 class DB {
   constructor() {
     // The MongoDB database connection
+    this.client = null;
     this.db = null;
   }
 
   connect() {
     const credentials = config.DB_USER ? `${config.DB_USER}:${config.DB_PASS}@` : '';
-    const uri = `mongodb://${credentials}${config.DB_HOST}:${config.DB_PORT}/${config.DB_DATABASE}`;
+    const uri = config.ENV !== 'dev'
+      ? `mongodb://${credentials}${config.DB_HOST}:${config.DB_PORT}/${config.DB_DATABASE}`
+      : `mongodb+srv://${credentials}${config.DB_HOST}/${config.DB_DATABASE}?retryWrites=true&w=majority`;
 
     return new Promise((resolve, reject) => {
-      if (this.db) {
+      if (this.client) {
         // Already connected
         resolve();
       }
       else {
         MongoClient.connect(uri)
-          .then((database) => {
-            this.db = database;
+          .then((client) => {
+            this.client = client;
+            this.db = client.db(config.DB_DATABASE);
 
             resolve();
           })
@@ -46,9 +50,10 @@ class DB {
     // but then move on. This method returns nothing – the caller can fire
     // and forget.
 
-    if (this.db) {
-      this.db.close()
+    if (this.client) {
+      this.client.close()
         .then(() => {
+          this.db = null;
         })
         .catch((error) => {
           logger.log(`[database.js] ERROR closing the connection: ${error.message}`);
