@@ -18,7 +18,7 @@ class DB {
 
   connect() {
     const credentials = config.DB_USER ? `${config.DB_USER}:${config.DB_PASS}@` : '';
-    const uri = config.ENV !== 'dev'
+    const uri = config.ENV === 'dev'
       ? `mongodb://${credentials}${config.DB_HOST}:${config.DB_PORT}/${config.DB_DATABASE}`
       : `mongodb+srv://${credentials}${config.DB_HOST}/${config.DB_DATABASE}?retryWrites=true&w=majority`;
 
