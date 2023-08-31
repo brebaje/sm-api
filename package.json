@@ -34,7 +34,7 @@
     "cors": "^2.8.1",
     "express": "^4.17.3",
     "moment": "^2.29.4",
-    "mongodb": "^3.6.3"
+    "mongodb": "^3.6.10"
   },
   "devDependencies": {
     "aglio": "^2.3.0",
